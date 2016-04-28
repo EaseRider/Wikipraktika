@@ -9,25 +9,84 @@
  * UI
  */
 window.addEventListener('load', function() {
-	//document.querySelector("input[value='0']").addEventListener("click",  console.log("0"));
 
-	/*
-	var welcome = (function() {
-		var executed = false;
-		return function () {
-			if (!executed) {
-				executed = true;
-				document.getElementById("output").innerHTML = "Welcome";
-			}else{
-				document.getElementById("output").innerHTML = "";
-			}
-		};
-	})();
-	welcome(); */
+	document.getElementById("key-c").addEventListener("click", function(){
+		document.getElementById("input").innerHTML = "";
+		document.getElementById("output").innerHTML = "";
+	});
 
+	 /* Operators */
+
+	document.getElementById("key-+").addEventListener("click", function(){
+		if(document.getElementById("input").innerHTML != ""){
+			document.getElementById("output").innerHTML = document.getElementById("input").value + " + ";
+			document.getElementById("input").innerHTML = "";
+
+		}else{
+			document.getElementById("output").innerHTML = document.getElementById("output").innerHTML + " + ";
+		}
+	});
+
+	document.getElementById("key--").addEventListener("click", function(){
+		if(document.getElementById("input").innerHTML != ""){
+			document.getElementById("output").innerHTML = document.getElementById("input").value + " - ";
+			document.getElementById("input").innerHTML = "";
+		}else{
+			document.getElementById("output").innerHTML = document.getElementById("output").innerHTML + "-";
+		}
+	});
+
+	document.getElementById("key-*").addEventListener("click", function(){
+		if(document.getElementById("input").innerHTML != ""){
+			document.getElementById("output").innerHTML = document.getElementById("input").value + " * ";
+			document.getElementById("input").innerHTML = "";
+
+		}else{
+			document.getElementById("output").innerHTML = document.getElementById("output").innerHTML + "*";
+		}
+	});
+
+	document.getElementById("key-/").addEventListener("click", function(){
+		if(document.getElementById("input").innerHTML != ""){
+			document.getElementById("output").innerHTML = document.getElementById("input").value + " / ";
+			document.getElementById("input").innerHTML = "";
+
+		}else{
+			document.getElementById("output").innerHTML = document.getElementById("output").innerHTML + "/";
+		}
+	});
+
+	document.getElementById("key-=").addEventListener("click", function(){
+
+		if(document.getElementById("output").value.indexOf("+") !== -1)
+		{
+			document.getElementById("input").innerHTML = parseInt(document.getElementById("output").value.replace("+", "")) + parseInt(document.getElementById("input").value);
+			document.getElementById("output").innerHTML = "";
+		}
+
+		if(document.getElementById("output").value.indexOf("-") !== -1)
+		{
+			document.getElementById("input").innerHTML = parseInt(document.getElementById("output").value.replace("-", "")) - parseInt(document.getElementById("input").value);
+			document.getElementById("output").innerHTML = "";
+		}
+
+		if(document.getElementById("output").value.indexOf("*") !== -1)
+		{
+			document.getElementById("input").innerHTML = parseInt(document.getElementById("output").value.replace("*", "")) * parseInt(document.getElementById("input").value);
+			document.getElementById("output").innerHTML = "";
+		}
+
+		if(document.getElementById("output").value.indexOf("/") !== -1)
+		{
+			document.getElementById("input").innerHTML = parseInt(document.getElementById("output").value.replace("/", "")) / parseInt(document.getElementById("input").value);
+			document.getElementById("output").innerHTML = "";
+		}
+
+	});
+
+	/* Keys */
 
 	document.getElementById("key-0").addEventListener("click", function() {
-		//welcome();
 		if(document.getElementById("input").innerHTML > 0){
 			document.getElementById("input").innerHTML =  document.getElementById("input").innerHTML + 0;
 		}else{
@@ -37,7 +96,6 @@ window.addEventListener('load', function() {
 	});
 
 	document.getElementById("key-1").addEventListener("click", function() {
-		//welcome();
 		if(document.getElementById("input").innerHTML == 0){
 			document.getElementById("input").innerHTML = 1;
 		}else{
@@ -46,7 +104,6 @@ window.addEventListener('load', function() {
 	});
 
 	document.getElementById("key-2").addEventListener("click", function() {
-		//welcome();
 		if(document.getElementById("input").innerHTML == 0){
 			document.getElementById("input").innerHTML = 2;
 		}else{
@@ -55,7 +112,6 @@ window.addEventListener('load', function() {
 	});
 
 	document.getElementById("key-3").addEventListener("click", function() {
-		//welcome();
 		if(document.getElementById("input").innerHTML == 0){
 			document.getElementById("input").innerHTML = 3;
 		}else{
@@ -64,7 +120,6 @@ window.addEventListener('load', function() {
 	});
 
 	document.getElementById("key-4").addEventListener("click", function() {
-		//welcome();
 		if(document.getElementById("input").innerHTML == 0){
 			document.getElementById("input").innerHTML = 4;
 		}else{
@@ -73,7 +128,6 @@ window.addEventListener('load', function() {
 	});
 
 	document.getElementById("key-5").addEventListener("click", function() {
-		//welcome();
 		if(document.getElementById("input").innerHTML == 0){
 			document.getElementById("input").innerHTML = 5;
 		}else{
@@ -82,7 +136,6 @@ window.addEventListener('load', function() {
 	});
 
 	document.getElementById("key-6").addEventListener("click", function() {
-		//welcome();
 		if(document.getElementById("input").innerHTML == 0){
 			document.getElementById("input").innerHTML = 6;
 		}else{
@@ -91,33 +144,27 @@ window.addEventListener('load', function() {
 	});
 
 	document.getElementById("key-7").addEventListener("click", function() {
-		//welcome();
 		if(document.getElementById("input").innerHTML == 0){
-			document.getElementById("input").innerHTML = 1;
+			document.getElementById("input").innerHTML = 7;
 		}else{
 			document.getElementById("input").innerHTML = document.getElementById("input").innerHTML + 7;
 		}
 	});
 
 	document.getElementById("key-8").addEventListener("click", function() {
-		//welcome();
 		if(document.getElementById("input").innerHTML == 0){
-			document.getElementById("input").innerHTML = 1;
+			document.getElementById("input").innerHTML = 8;
 		}else{
 			document.getElementById("input").innerHTML = document.getElementById("input").innerHTML + 8;
 		}
 	});
 
 	document.getElementById("key-9").addEventListener("click", function() {
-		//welcome();
 		if(document.getElementById("input").innerHTML == 0){
-			document.getElementById("input").innerHTML = 1;
+			document.getElementById("input").innerHTML = 9;
 		}else{
 			document.getElementById("input").innerHTML = document.getElementById("input").innerHTML + 9;
 		}
 	});
-
-
-
 
 });
