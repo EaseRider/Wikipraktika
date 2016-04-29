@@ -15,13 +15,15 @@ function multiply(n1,n2){
 }
 
 function divide(n1,n2){
-	console.log(n1);
 	if(n1 == 0){
 		return "Invalid Calculation!";
 	}
 	return n1 / n2;
 }
 
+function replaceOperator(string,operatorToReplace,newOperator){
+	return string.value.replace(operatorToReplace,newOperator);
+}
 
 /**
  * UI
@@ -30,29 +32,82 @@ window.addEventListener('load', function() {
 	var number1;
 	var number2;
 	var operator;
+	var changeOperator;
 
 	document.getElementById("key-c").addEventListener("click", function(){
 		document.getElementById("input").innerHTML = "";
 		document.getElementById("output").innerHTML = "";
+		number1 = 0;
+		number2 = 0;
 	});
 
 	 /* Operators */
 
 	document.getElementById("key-+").addEventListener("click", function(){
-		if(document.getElementById("input").innerHTML != ""){
+
+		if(document.getElementById("input").value != "" && document.getElementById("output").value != ""){
+
 			number1 = document.getElementById("input").value;
-			document.getElementById("output").innerHTML = document.getElementById("input").value + " + ";
-			document.getElementById("input").innerHTML = "";
+			number2 = document.getElementById("output").value.toString();
+
+			switch (number2) {
+				case "-":
+					number2 = replaceOperator(number2,"-","+");
+					break;
+				case "*":
+					number2 = replaceOperator(number2,"*","+");
+					break;
+				case "/":
+					number2 = replaceOperator(number2,"/","+");
+					break;
+			}
+
+			number1 = parseInt(number1);
+			number2 = parseInt(number2);
+
+			document.getElementById("output").innerHTML = number2 + " " + "+" + " ";
+			document.getElementById("input").innerHTML = number1;
 			operator = "+";
-		}else{
+			changeOperator = true;
+		} else if(document.getElementById("input").innerHTML != ""){
+			operator = "+";
+			number1 = document.getElementById("input").value;
+			document.getElementById("output").innerHTML = number1 + " " + operator + " ";
+			document.getElementById("input").innerHTML = "";
+			number1 = parseInt(number1);
+		} else{
 			document.getElementById("output").innerHTML = document.getElementById("output").innerHTML + " + ";
 		}
 	});
 
 	document.getElementById("key--").addEventListener("click", function(){
-		if(document.getElementById("input").innerHTML != ""){
+		if(document.getElementById("input").value != "" && document.getElementById("output").value != ""){
+
+			number2 = document.getElementById("input").value;
+			number1 = document.getElementById("output").value.toString();
+
+			switch (number1) {
+				case "+":
+					number1 = replaceOperator(number1,"+","-");
+					break;
+				case "*":
+					number1 = replaceOperator(number1,"*","-");
+					break;
+				case "/":
+					number1 = replaceOperator(number1,"/","-");
+					break;
+			}
+
+			number1 = parseInt(number1);
+			number2 = parseInt(number2);
+
+			document.getElementById("output").innerHTML = number1 + " " + "-" + " ";
+			document.getElementById("input").innerHTML = number2;
+			operator = "-";
+			changeOperator = true;
+		} else if(document.getElementById("input").innerHTML != ""){
 			number1 = document.getElementById("input").value;
-			document.getElementById("output").innerHTML = document.getElementById("input").value + " - ";
+			document.getElementById("output").innerHTML = number1 + " - ";
 			document.getElementById("input").innerHTML = "";
 			operator = "-";
 		}else{
@@ -61,7 +116,31 @@ window.addEventListener('load', function() {
 	});
 
 	document.getElementById("key-*").addEventListener("click", function(){
-		if(document.getElementById("input").innerHTML != ""){
+		if(document.getElementById("input").value != "" && document.getElementById("output").value != ""){
+
+			number1 = document.getElementById("input").value;
+			number2 = document.getElementById("output").value.toString();
+
+			switch (number2) {
+				case "+":
+					number2 = replaceOperator(number2,"+","*");
+					break;
+				case "-":
+					number2 = replaceOperator(number2,"-","*");
+					break;
+				case "/":
+					number2 = replaceOperator(number2,"/","*");
+					break;
+			}
+
+			number1 = parseInt(number1);
+			number2 = parseInt(number2);
+
+			document.getElementById("output").innerHTML = number2 + " " + "*" + " ";
+			document.getElementById("input").innerHTML = number1;
+			operator = "*";
+			changeOperator = true;
+		} else if(document.getElementById("input").innerHTML != ""){
 			number1 = document.getElementById("input").value;
 			document.getElementById("output").innerHTML = document.getElementById("input").value + " * ";
 			document.getElementById("input").innerHTML = "";
@@ -72,7 +151,31 @@ window.addEventListener('load', function() {
 	});
 
 	document.getElementById("key-/").addEventListener("click", function(){
-		if(document.getElementById("input").innerHTML != ""){
+		if(document.getElementById("input").value != "" && document.getElementById("output").value != ""){
+
+			number2 = document.getElementById("input").value;
+			number1 = document.getElementById("output").value.toString();
+
+			switch (number1) {
+				case "+":
+					number1 = replaceOperator(number1,"+","/");
+					break;
+				case "-":
+					number1 = replaceOperator(number1,"-","/");
+					break;
+				case "*":
+					number1 = replaceOperator(number1,"*","/");
+					break;
+			}
+
+			number1 = parseInt(number1);
+			number2 = parseInt(number2);
+
+			document.getElementById("output").innerHTML = number1 + " " + "/" + " ";
+			document.getElementById("input").innerHTML = number2;
+			operator = "/";
+			changeOperator = true;
+		} else if(document.getElementById("input").innerHTML != ""){
 			number1 = document.getElementById("input").value;
 			document.getElementById("output").innerHTML = document.getElementById("input").value + " / ";
 			document.getElementById("input").innerHTML = "";
@@ -84,8 +187,13 @@ window.addEventListener('load', function() {
 
 	document.getElementById("key-=").addEventListener("click", function(){
 
-		number1 = parseInt(number1);
-		number2 = parseInt(document.getElementById("input").value);
+		if(!changeOperator){
+			number2 = parseInt(document.getElementById("input").value);
+		}else{
+			changeOperator = false;
+		}
+
+
 		switch(operator) {
 			case "+":
 				add(number1,number2);
