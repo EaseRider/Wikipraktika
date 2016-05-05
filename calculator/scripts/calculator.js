@@ -1,56 +1,63 @@
 /**
  * core
  */
-
-function add(n1,n2){
-
+function isInvalid(n1,n2){
 	if(isNaN(n1) || isNaN(n2) || typeof(n1) == "undefined" || typeof(n2) == "undefined"){
+		return true;
+	}
+	return false;
+}
+function add(n1,n2){
+	if(isInvalid(n1,n2)){
 		return "Invalid Calculation!";
 	}
-
 	return n1 + n2;
 }
 
 function subtract(n1,n2){
-
-	if(isNaN(n1) || isNaN(n2) || typeof(n1) == "undefined" || typeof(n2) == "undefined"){
+	if(isInvalid(n1,n2)){
 		return "Invalid Calculation!";
 	}
-
 	return n1 - n2;
 }
 
 function multiply(n1,n2){
-
-	if(isNaN(n1) || isNaN(n2) || typeof(n1) == "undefined" || typeof(n2) == "undefined"){
+	if(isInvalid(n1,n2)){
 		return "Invalid Calculation!";
 	}
-
 	return n1 * n2;
 }
 
 function divide(n1,n2){
-
-	console.log("n1: " + n1);
-	console.log("n2: " + n2);
-	if(isNaN(n1) || isNaN(n2) || typeof(n1) == "undefined" || n2 == 0 || typeof(n2) == "undefined"){
+	if(isInvalid(n1,n2) || n2 == 0){
 		return "Invalid Calculation!";
 	}
-
 	return n1 / n2;
 }
 
-function replaceOperator(string,operatorToReplace,newOperator){
-
-	return string.value.replace(operatorToReplace,newOperator);
-}
-
 function checkOperatorInOutput(text){
-
 	if(text.indexOf("+") == -1 && text.indexOf("/") == -1 && text.indexOf("*") == -1 && text.indexOf("-") == -1  ){
 		return true;
 	}
 	return false;
+}
+
+function findAndReplaceOperator(number,mainOperator){
+	var operators = ["+", "-", "*", "/"];
+	operators.splice(operators.indexOf(mainOperator),1);
+
+	switch (number) {
+		case operators[0]:
+			number = number.value.replace(operators[0],mainOperator);
+			break;
+		case operators[1]:
+			number = number.value.replace(operators[1],mainOperator);
+			break;			
+		case operators[2]:
+			number = number.value.replace(operators[2],mainOperator);
+			break;
+	}		
+	return number;
 }
 
 /**
@@ -69,156 +76,30 @@ window.addEventListener('load', function() {
 		number2 = undefined;
 	});
 
-	 /* Operators */
-
-	document.getElementById("key-+").addEventListener("click", function(){
-
-		if(document.getElementById("input").value != "" && document.getElementById("output").value != ""){
-			number1 = document.getElementById("output").value.toString();
-			number2 = document.getElementById("input").value;
-
-			switch (number1) {
-				case "-":
-					number1 = replaceOperator(number1,"-","+");
-					break;
-				case "*":
-					number1 = replaceOperator(number1,"*","+");
-					break;
-				case "/":
-					number1 = replaceOperator(number1,"/","+");
-					break;
+	 /* Operator Events */
+	var operators = ["+", "-", "*", "/"];
+	
+	operators.forEach(function(element) {
+	  	document.getElementById("key-" + element).addEventListener("click", function(){
+			if(document.getElementById("input").value != "" && document.getElementById("output").value != ""){
+				number1 = parseInt(findAndReplaceOperator(document.getElementById("output").value.toString(),element));
+				number2 = parseInt(document.getElementById("input").value);
+				document.getElementById("output").innerHTML = number1 + " " + element + " ";
+				document.getElementById("input").innerHTML = number2;
+				operator = element;
+				changeOperator = true;
+			}else if(document.getElementById("input").innerHTML != ""){
+				number1 = parseInt(document.getElementById("input").value);
+				document.getElementById("output").innerHTML = number1 + " " + element + " ";
+				document.getElementById("input").innerHTML = "";
+				operator = element;
+			}else{
+				if(checkOperatorInOutput(document.getElementById("output").value.toString()) || document.getElementById("output").value.length == 0){
+					document.getElementById("output").innerHTML = document.getElementById("output").innerHTML + " " + element + " ";
+				}
+				operator = element;
 			}
-
-			number1 = parseInt(number1);
-			number2 = parseInt(number2);
-
-			document.getElementById("output").innerHTML = number1 + " " + "+" + " ";
-			document.getElementById("input").innerHTML = number2;
-			operator = "+";
-			changeOperator = true;
-		} else if(document.getElementById("input").innerHTML != ""){
-			number1 = document.getElementById("input").value;
-			document.getElementById("output").innerHTML = number1 + " " + "+" + " ";
-			document.getElementById("input").innerHTML = "";
-			number1 = parseInt(number1);
-			operator = "+";
-		} else{
-			if(checkOperatorInOutput(document.getElementById("output").value.toString()) || document.getElementById("output").value.length == 0){
-				document.getElementById("output").innerHTML = document.getElementById("output").innerHTML + " + ";
-			}
-			operator = "+";
-		}
-	});
-
-	document.getElementById("key--").addEventListener("click", function(){
-		if(document.getElementById("input").value != "" && document.getElementById("output").value != ""){
-			number1 = document.getElementById("output").value.toString();
-			number2 = document.getElementById("input").value;
-
-			switch (number1) {
-				case "+":
-					number1 = replaceOperator(number1,"+","-");
-					break;
-				case "*":
-					number1 = replaceOperator(number1,"*","-");
-					break;
-				case "/":
-					number1 = replaceOperator(number1,"/","-");
-					break;
-			}
-
-			number1 = parseInt(number1);
-			number2 = parseInt(number2);
-
-			document.getElementById("output").innerHTML = number1 + " " + "-" + " ";
-			document.getElementById("input").innerHTML = number2;
-			operator = "-";
-			changeOperator = true;
-		} else if(document.getElementById("input").innerHTML != ""){
-			number1 = document.getElementById("input").value;
-			document.getElementById("output").innerHTML = number1 + " - ";
-			document.getElementById("input").innerHTML = "";
-			operator = "-";
-		}else{
-			if(checkOperatorInOutput(document.getElementById("output").value.toString()) || document.getElementById("output").value.length == 0) {
-				document.getElementById("output").innerHTML = document.getElementById("output").innerHTML + "-";
-			}
-			operator = "-";
-		}
-	});
-
-	document.getElementById("key-*").addEventListener("click", function(){
-		if(document.getElementById("input").value != "" && document.getElementById("output").value != ""){
-			number1 = document.getElementById("output").value.toString();
-			number2 = document.getElementById("input").value;
-
-			switch (number1) {
-				case "+":
-					number1 = replaceOperator(number1,"+","*");
-					break;
-				case "-":
-					number1 = replaceOperator(number1,"-","*");
-					break;
-				case "/":
-					number1 = replaceOperator(number1,"/","*");
-					break;
-			}
-
-			number1 = parseInt(number1);
-			number2 = parseInt(number2);
-
-			document.getElementById("output").innerHTML = number1 + " " + "*" + " ";
-			document.getElementById("input").innerHTML = number2;
-			operator = "*";
-			changeOperator = true;
-		} else if(document.getElementById("input").innerHTML != ""){
-			number1 = document.getElementById("input").value;
-			document.getElementById("output").innerHTML = document.getElementById("input").value + " * ";
-			document.getElementById("input").innerHTML = "";
-			operator = "*";
-		}else{
-			if(checkOperatorInOutput(document.getElementById("output").value.toString()) || document.getElementById("output").value.length == 0) {
-				document.getElementById("output").innerHTML = document.getElementById("output").innerHTML + "*";
-			}
-			operator = "*";
-		}
-	});
-
-	document.getElementById("key-/").addEventListener("click", function(){
-		if(document.getElementById("input").value != "" && document.getElementById("output").value != ""){
-			number1 = document.getElementById("output").value.toString();
-			number2 = document.getElementById("input").value;
-
-			switch (number1) {
-				case "+":
-					number1 = replaceOperator(number1,"+","/");
-					break;
-				case "-":
-					number1 = replaceOperator(number1,"-","/");
-					break;
-				case "*":
-					number1 = replaceOperator(number1,"*","/");
-					break;
-			}
-
-			number1 = parseInt(number1);
-			number2 = parseInt(number2);
-
-			document.getElementById("output").innerHTML = number1 + " " + "/" + " ";
-			document.getElementById("input").innerHTML = number2;
-			operator = "/";
-			changeOperator = true;
-		} else if(document.getElementById("input").innerHTML != ""){
-			number1 = document.getElementById("input").value;
-			document.getElementById("output").innerHTML = document.getElementById("input").value + " / ";
-			document.getElementById("input").innerHTML = "";
-			operator = "/";
-		}else{
-			if(checkOperatorInOutput(document.getElementById("output").value.toString()) || document.getElementById("output").value.length == 0) {
-				document.getElementById("output").innerHTML = document.getElementById("output").innerHTML + "/";
-			}
-			operator = "/";
-		}
+		});
 	});
 
 	document.getElementById("key-=").addEventListener("click", function(){
@@ -227,7 +108,6 @@ window.addEventListener('load', function() {
 		}else{
 			changeOperator = false;
 		}
-
 
 		switch(operator) {
 			case "+":
@@ -250,9 +130,7 @@ window.addEventListener('load', function() {
 
 	});
 
-	/* Keys */
-
-
+	/* Key Press Events */
 	for (var id = 0; id <= 9; id++) {
 	 (function(id){
 	 	if(id == 0){ 
@@ -276,5 +154,4 @@ window.addEventListener('load', function() {
 	})(id)
 
 	}
-
 });
