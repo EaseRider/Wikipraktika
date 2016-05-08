@@ -5,13 +5,14 @@
 	-ms-box-sizing: border-box;
 	box-sizing: border-box;
 	margin: 0;
-	padding: 0;
+	/*padding: 0;*/
 }
 
 /* document */
 body {
 	font-size: 1rem;
 	font-family: "URW Gothic L", "Helvetica", "Arial", sans-serif;
+	counter-reset: h2counter;
 }
 
 
@@ -19,6 +20,15 @@ body {
 /* images */
 
 
+/* titles */
+h1 {
+	counter-reset: h2counter;
+}
+h2:before {
+	content: counter(h2counter) "\0000a0\0000a0";
+	counter-increment: h2counter;
+	counter-reset: h3counter;
+}
 
 /* text */
 
@@ -34,6 +44,10 @@ body {
 
 /* forms */
 
+label:after {
+	content: '\A';
+	white-space: pre;
+}
 
 
 #font-size-form {
