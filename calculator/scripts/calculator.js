@@ -11,28 +11,32 @@ function add(n1,n2){
 	if(isInvalid(n1,n2)){
 		return "Invalid Calculation!";
 	}
-	return n1 + n2;
+	var result = parseFloat(n1) + parseFloat(n2);
+	return result.toFixed(2);
 }
 
 function subtract(n1,n2){
 	if(isInvalid(n1,n2)){
 		return "Invalid Calculation!";
 	}
-	return n1 - n2;
+	var result = parseFloat(n1) - parseFloat(n2);
+	return result.toFixed(2);
 }
 
 function multiply(n1,n2){
 	if(isInvalid(n1,n2)){
 		return "Invalid Calculation!";
 	}
-	return n1 * n2;
+	var result = parseFloat(n1) * parseFloat(n2);
+	return result.toFixed(2);
 }
 
 function divide(n1,n2){
 	if(isInvalid(n1,n2) || n2 == 0){
 		return "Invalid Calculation!";
 	}
-	return n1 / n2;
+	var result = parseFloat(n1) / parseFloat(n2);
+	return result.toFixed(2);
 }
 
 function checkOperatorInOutput(text){
@@ -82,14 +86,14 @@ window.addEventListener('load', function() {
 	operators.forEach(function(element) {
 	  	document.getElementById("key-" + element).addEventListener("click", function(){
 			if(document.getElementById("input").value != "" && document.getElementById("output").value != ""){
-				number1 = parseInt(findAndReplaceOperator(document.getElementById("output").value.toString(),element));
-				number2 = parseInt(document.getElementById("input").value);
+				number1 = parseFloat(findAndReplaceOperator(document.getElementById("output").value.toString(),element));
+				number2 = parseFloat(document.getElementById("input").value);
 				document.getElementById("output").innerHTML = number1 + " " + element + " ";
 				document.getElementById("input").innerHTML = number2;
 				operator = element;
 				changeOperator = true;
 			}else if(document.getElementById("input").innerHTML != ""){
-				number1 = parseInt(document.getElementById("input").value);
+				number1 = parseFloat(document.getElementById("input").value);
 				document.getElementById("output").innerHTML = number1 + " " + element + " ";
 				document.getElementById("input").innerHTML = "";
 				operator = element;
@@ -104,7 +108,7 @@ window.addEventListener('load', function() {
 
 	document.getElementById("key-=").addEventListener("click", function(){
 		if(!changeOperator){
-			number2 = parseInt(document.getElementById("input").value);
+			number2 = parseFloat(document.getElementById("input").value);
 		}else{
 			changeOperator = false;
 		}
