@@ -29,16 +29,17 @@ a[hreflang="en"]::before {
 }
 a[hreflang]::before {
 	content: '';
-	-webkit-background-size: 50px 50px;
-	background-size: 50px 50px;
-	width: 50px;
-	height: 50px;
+	-webkit-background-size: 22px 18px;
+	background-size: 22px 18px;
+	width: 22px;
+	height: 18px;
 	display: inline-block;
 }
 
 /* titles */
-header {
-	background-color: #FF00FF;
+body > header {
+	float: none;
+	margin-bottom: 40px;
 }
 h1 {
 	width: 100%;
@@ -56,17 +57,25 @@ header > a {
 	position: relative;
 	display: inline;
 	margin-right: 10px;
+	padding: 5px;
 	background: url("../media/logo-wikipraktika.svg");
 }
 h2 {
+	margin-top: 30px;
 	font-size: 40px;
-	float: none;
+	display: block;
 	counter-reset: h3counter;
 }
 h3:before {
 	content: counter(h3counter) "\0000a0\0000a0";
 	counter-increment: h3counter;
 }
+
+/* nav */
+nav > * {
+	padding-left: 0px;
+}
+
 
 /* text */
 
