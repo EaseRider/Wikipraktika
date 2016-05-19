@@ -274,7 +274,7 @@
             </tr>
             <tr>
                 <th>Division</th>
-                <td>210</td>
+                 <td>210</td>
             </tr>
             <tr>
                 <th>Modulo</th>
@@ -301,7 +301,7 @@
 
         </table>
         <figure>
-            <img width="100%" src="../media/zeitgewinn.svg" alt="Grafik Zeigewinn" role="application"/>
+            <img class="smallCentered" src="../media/zeitgewinn.svg" alt="Grafik Zeigewinn" role="application"/>
         </figure>
 
         <footer>
@@ -338,7 +338,7 @@
             <li>Casino Basic</li>
         </ol>
         <p>Am schlechtesten schnitten die Geräte von HG ab:</p>
-        <ol start="78">
+        <ol start="78" reversed>
             <li>HG Productive</li>
             <li>HG Calc++</li>
             <li>HG GO-ON</li>
@@ -370,8 +370,8 @@
         </form>
     </article>
 
-    <article>
-        <h3>Neuen Autor registrieren</h3>
+    <aside>
+        <h2>Neuen Autor registrieren</h2>
 
         <form>
             <fieldset>
@@ -392,7 +392,7 @@
                     <input type="url" name="website" value=""/>
                 </label>
                 <label>Geburtsdatum
-                    <input type="date" name="aniversary" value=""/>
+                    <input type="date" name="aniversary" value="" required />
                 </label>
                 <label>Nationalität
                     <select name="nationality">
@@ -415,15 +415,15 @@
             <fieldset>
                 <legend>Rechtliches</legend>
                 <label>
-                    <input type="checkbox" name="urhtext"/>
+                    <input type="checkbox" name="urhtext" required />
                     Ich bestätige, das ich keine Texte veröffentlichen werde, deren Urheber ich nicht bin
                 </label>
                 <label>
-                    <input type="checkbox" name="urhmedien"/>
+                    <input type="checkbox" name="urhmedien" required />
                     Ich bestätige, das ich keine Medien veröffentlichen werden, deren Urheber ich nicht bin
                 </label>
                 <label>
-                    <input type="checkbox" name="publishtexts"/>
+                    <input type="checkbox" name="publishtexts" required />
                     Ich bestätige, das nur Texte veröffentlichen werde, die nach bestem Treu und glauben der Wahrheit
                     entsprechen und
                     eingereichte Medien Bilder nicht manipuliert wurden
@@ -433,20 +433,27 @@
             <button type="reset">Eingaben zurücksetzen</button>
 
         </form>
-    </article>
+    </aside>
 
 </main>
 
 <footer>
-    Bahnhofstrasse 42,
-    8000 Zürich
+    <address>
+        Bahnhofstrasse 42,
+        8000 Zürich
+    </address>
 
-    055 444 33 22
-    info@wikipraktika.com
-
-    Alle Inhalte von Wikipraktika stehen unter der |https://i.creativecommons.org/l/by-sa/4.0/88x31.png|
-    (http://creativecommons.org/licenses/by-sa/4.0/) Creative Commons Attribution-ShareAlike 4.0 International License
-    (http://creativecommons.org/licenses/by-sa/4.0/) und dürfen nur mit Nennung des Autors weiterverwendet werden.
+    <p>
+        <a href="tel:+41554443322">055 444 33 22</a>
+        <a href="mailto:info@wikipraktika.com">info@wikipraktika.com</a>
+    </p>
+    <small>
+        Alle Inhalte von Wikipraktika stehen unter der
+        <a href="http://creativecommons.org/licenses/by-sa/4.0/">
+            <img src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" />Creative Commons Attribution-ShareAlike 4.0 International License
+        </a>
+        und dürfen nur mit Nennung des Autors weiterverwendet werden.
+    </small>
 </footer>
 
 <!-- TODO -->
