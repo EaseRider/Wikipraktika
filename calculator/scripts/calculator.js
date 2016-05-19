@@ -72,10 +72,14 @@ window.addEventListener('load', function() {
 	var number2;
 	var operator;
 	var changeOperator;
+	
+	
+	var inputField = document.getElementById("input");
+	var outputField = document.getElementById("output");
 
 	document.getElementById("key-c").addEventListener("click", function(){
-		document.getElementById("input").innerHTML = "";
-		document.getElementById("output").innerHTML = "";
+		inputField.innerHTML = "";
+		outputField.innerHTML = "";
 		number1 = undefined;
 		number2 = undefined;
 	});
@@ -83,23 +87,24 @@ window.addEventListener('load', function() {
 	 /* Operator Events */
 	var operators = ["+", "-", "*", "/"];
 	
+	
 	operators.forEach(function(element) {
 	  	document.getElementById("key-" + element).addEventListener("click", function(){
-			if(document.getElementById("input").value != "" && document.getElementById("output").value != ""){
-				number1 = parseFloat(findAndReplaceOperator(document.getElementById("output").value.toString(),element));
-				number2 = parseFloat(document.getElementById("input").value);
-				document.getElementById("output").innerHTML = number1 + " " + element + " ";
-				document.getElementById("input").innerHTML = number2;
+			if(inputField.value != "" && outputField.value != ""){
+				number1 = parseFloat(findAndReplaceOperator(outputField.value.toString(),element));
+				number2 = parseFloat(inputField.value);
+				outputField.innerHTML = number1 + " " + element + " ";
+				inputField.innerHTML = number2;
 				operator = element;
 				changeOperator = true;
-			}else if(document.getElementById("input").innerHTML != ""){
-				number1 = parseFloat(document.getElementById("input").value);
-				document.getElementById("output").innerHTML = number1 + " " + element + " ";
-				document.getElementById("input").innerHTML = "";
+			}else if(inputField.innerHTML != ""){
+				number1 = parseFloat(inputField.value);
+				outputField.innerHTML = number1 + " " + element + " ";
+				inputField.innerHTML = "";
 				operator = element;
 			}else{
-				if(checkOperatorInOutput(document.getElementById("output").value.toString()) || document.getElementById("output").value.length == 0){
-					document.getElementById("output").innerHTML = document.getElementById("output").innerHTML + " " + element + " ";
+				if(checkOperatorInOutput(outputField.value.toString()) || outputField.value.length == 0){
+					outputField.innerHTML = outputField.innerHTML + " " + element + " ";
 				}
 				operator = element;
 			}
@@ -108,27 +113,27 @@ window.addEventListener('load', function() {
 
 	document.getElementById("key-=").addEventListener("click", function(){
 		if(!changeOperator){
-			number2 = parseFloat(document.getElementById("input").value);
+			number2 = parseFloat(inputField.value);
 		}else{
 			changeOperator = false;
 		}
 
 		switch(operator) {
 			case "+":
-				document.getElementById("input").innerHTML = add(number1,number2);
-				document.getElementById("output").innerHTML = "";
+				inputField.innerHTML = add(number1,number2);
+				outputField.innerHTML = "";
 				break;
 			case "-":
-				document.getElementById("input").innerHTML = subtract(number1,number2);
-				document.getElementById("output").innerHTML = "";
+				inputField.innerHTML = subtract(number1,number2);
+				outputField.innerHTML = "";
 				break;
 			case "*":
-				document.getElementById("input").innerHTML = multiply(number1,number2);
-				document.getElementById("output").innerHTML = "";
+				inputField.innerHTML = multiply(number1,number2);
+				outputField.innerHTML = "";
 				break;
 			case "/":
-				document.getElementById("input").innerHTML = divide(number1,number2);
-				document.getElementById("output").innerHTML = "";
+				inputField.innerHTML = divide(number1,number2);
+				outputField.innerHTML = "";
 				break;
 		}
 
@@ -139,18 +144,18 @@ window.addEventListener('load', function() {
 	 (function(id){
 	 	if(id == 0){ 
 		 	document.getElementById("key-0").addEventListener("click", function() {
-				if(document.getElementById("input").innerHTML > 0){
-					document.getElementById("input").innerHTML =  document.getElementById("input").innerHTML + 0;
+				if(inputField.innerHTML > 0){
+					inputField.innerHTML =  inputField.innerHTML + 0;
 				}else{
-					document.getElementById("input").innerHTML = 0;
+					inputField.innerHTML = 0;
 				}
 			});
 	 	}else{
 	 		document.getElementById("key-" + id).addEventListener("click", function() {
-				if(document.getElementById("input").innerHTML == 0){
-					document.getElementById("input").innerHTML = id;
+				if(inputField.innerHTML == 0){
+					inputField.innerHTML = id;
 				}else{
-					document.getElementById("input").innerHTML = document.getElementById("input").innerHTML + id;
+					inputField.innerHTML = inputField.innerHTML + id;
 				}
 	 		});
 	 	}
