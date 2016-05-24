@@ -140,9 +140,10 @@ window.addEventListener('load', function() {
 	});
 
 	/* Key Press Events */
-	for (var id = 0; id <= 9; id++) {
-	 (function(id){
-	 	if(id == 0){ 
+	var numbers = document.getElementsByClassName("number");
+
+	function keyPressEvents(numbers){
+		if(numbers.value == 0){ 
 		 	document.getElementById("key-0").addEventListener("click", function() {
 				if(inputField.innerHTML > 0){
 					inputField.innerHTML =  inputField.innerHTML + 0;
@@ -151,16 +152,17 @@ window.addEventListener('load', function() {
 				}
 			});
 	 	}else{
-	 		document.getElementById("key-" + id).addEventListener("click", function() {
+	 		document.getElementById("key-" + numbers.value).addEventListener("click", function() {
 				if(inputField.innerHTML == 0){
-					inputField.innerHTML = id;
+					inputField.innerHTML = numbers.value;
 				}else{
-					inputField.innerHTML = inputField.innerHTML + id;
+					inputField.innerHTML = inputField.innerHTML +  numbers.value;
 				}
 	 		});
 	 	}
-	 	
-	})(id)
-
 	}
+
+	Array.prototype.forEach.call(numbers, keyPressEvents);
+
+
 });
