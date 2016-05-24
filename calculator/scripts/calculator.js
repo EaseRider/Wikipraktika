@@ -2,6 +2,7 @@
  * core
  */
 function isInvalid(n1,n2){
+
 	if(isNaN(n1) || isNaN(n2) || typeof(n1) == "undefined" || typeof(n2) == "undefined"){
 		return true;
 	}
@@ -36,6 +37,7 @@ function calculate(n1,n2,operator){
 }
 
 function checkOperatorInOutput(text){
+
 	if(text.indexOf("+") == -1 && text.indexOf("/") == -1 && text.indexOf("*") == -1 && text.indexOf("-") == -1  ){
 		return true;
 	}
@@ -43,6 +45,7 @@ function checkOperatorInOutput(text){
 }
 
 function findAndReplaceOperator(number,mainOperator){
+
 	var operators = ["+", "-", "*", "/"];
 	operators.splice(operators.indexOf(mainOperator),1);
 
@@ -64,20 +67,27 @@ function findAndReplaceOperator(number,mainOperator){
  * UI
  */
 window.addEventListener('load', function() {
+
 	var number1;
 	var number2;
 	var operator;
 	var changeOperator;
-	
-	
+	var invalid = false;
 	var inputField = document.getElementById("input");
 	var outputField = document.getElementById("output");
 
 	 /* Operator Events */
 
+	var operators = document.getElementsByClassName("operator");
+
     function operatorPressed(operators){
 
     	document.getElementById("key-" + operators.value).addEventListener("click", function(){
+    		
+    		if(invalid){
+				return;
+			}
+
 			if(inputField.value != "" && outputField.value != ""){
 				number1 = parseFloat(findAndReplaceOperator(outputField.value.toString(),operators.value));
 				number2 = parseFloat(inputField.value);
@@ -99,15 +109,19 @@ window.addEventListener('load', function() {
 		});
     }
 
-    var operators = document.getElementsByClassName("operator");
 	Array.prototype.forEach.call(operators, operatorPressed);
-
 
 	/* Command Events */
 
 	document.getElementById("key-=").addEventListener("click", equal);
 
 	function equal(){
+
+		if(invalid){
+			invalid = false;
+			clear();
+		}
+
 		if(!changeOperator){
 			number2 = parseFloat(inputField.value);
 		}else{
@@ -115,12 +129,19 @@ window.addEventListener('load', function() {
 		}
 
 		inputField.innerHTML = calculate(number1,number2,operator);
+
+		if(isNaN(inputField.innerHTML)){
+			invalid = true;
+		}
+
+		console.log(invalid);
 		outputField.innerHTML = "";
 	}
 
 	document.getElementById("key-c").addEventListener("click",clear);
 
 	function clear(){
+
 		inputField.innerHTML = "";
 		outputField.innerHTML = "";
 		number1 = undefined;
@@ -128,11 +149,19 @@ window.addEventListener('load', function() {
 	}
 
 	/* Number Events */
+	
 	var numbers = document.getElementsByClassName("number");
 
 	function keyPressEvents(numbers){
+	
 		if(numbers.value == 0){ 
 		 	numbers.addEventListener("click", function() {
+
+		 		if(invalid){
+					invalid = false;
+					clear();
+				}
+
 				if(inputField.innerHTML > 0){
 					inputField.innerHTML =  inputField.innerHTML + 0;
 				}else{
@@ -141,6 +170,12 @@ window.addEventListener('load', function() {
 			});
 	 	}else{
 	 		numbers.addEventListener("click", function() {
+	 			
+	 			if(invalid){
+					invalid = false;
+					clear();
+				}
+
 				if(inputField.innerHTML == 0){
 					inputField.innerHTML = numbers.value;
 				}else{
