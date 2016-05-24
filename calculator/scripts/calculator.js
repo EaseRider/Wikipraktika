@@ -7,36 +7,32 @@ function isInvalid(n1,n2){
 	}
 	return false;
 }
-function add(n1,n2){
-	if(isInvalid(n1,n2)){
-		return "Invalid Calculation!";
-	}
-	var result = parseFloat(n1) + parseFloat(n2);
-	return result.toFixed(2);
-}
 
-function subtract(n1,n2){
+function calculate(n1,n2,operator){
+	
 	if(isInvalid(n1,n2)){
+		invalid = true;
 		return "Invalid Calculation!";
 	}
-	var result = parseFloat(n1) - parseFloat(n2);
-	return result.toFixed(2);
-}
 
-function multiply(n1,n2){
-	if(isInvalid(n1,n2)){
-		return "Invalid Calculation!";
+	switch(operator) {
+		case "+":
+			var result = parseFloat(n1) + parseFloat(n2);
+			return result.toFixed(2);	
+		case "-":
+			var result = parseFloat(n1) - parseFloat(n2);
+			return result.toFixed(2);
+		case "*":
+			var result = parseFloat(n1) * parseFloat(n2);
+			return result.toFixed(2);
+		case "/":
+			if(n2 == 0){
+				return "Invalid Calculation!";
+				invalid = true;
+			}
+			var result = parseFloat(n1) / parseFloat(n2);
+			return result.toFixed(2);
 	}
-	var result = parseFloat(n1) * parseFloat(n2);
-	return result.toFixed(2);
-}
-
-function divide(n1,n2){
-	if(isInvalid(n1,n2) || n2 == 0){
-		return "Invalid Calculation!";
-	}
-	var result = parseFloat(n1) / parseFloat(n2);
-	return result.toFixed(2);
 }
 
 function checkOperatorInOutput(text){
@@ -77,74 +73,66 @@ window.addEventListener('load', function() {
 	var inputField = document.getElementById("input");
 	var outputField = document.getElementById("output");
 
-	document.getElementById("key-c").addEventListener("click", function(){
-		inputField.innerHTML = "";
-		outputField.innerHTML = "";
-		number1 = undefined;
-		number2 = undefined;
-	});
-
 	 /* Operator Events */
-	var operators = ["+", "-", "*", "/"];
-	
-	
-	operators.forEach(function(element) {
-	  	document.getElementById("key-" + element).addEventListener("click", function(){
+
+    function operatorPressed(operators){
+
+    	document.getElementById("key-" + operators.value).addEventListener("click", function(){
 			if(inputField.value != "" && outputField.value != ""){
-				number1 = parseFloat(findAndReplaceOperator(outputField.value.toString(),element));
+				number1 = parseFloat(findAndReplaceOperator(outputField.value.toString(),operators.value));
 				number2 = parseFloat(inputField.value);
-				outputField.innerHTML = number1 + " " + element + " ";
+				outputField.innerHTML = number1 + " " + operators.value + " ";
 				inputField.innerHTML = number2;
-				operator = element;
+				operator = operators.value;
 				changeOperator = true;
 			}else if(inputField.innerHTML != ""){
 				number1 = parseFloat(inputField.value);
-				outputField.innerHTML = number1 + " " + element + " ";
+				outputField.innerHTML = number1 + " " + operators.value + " ";
 				inputField.innerHTML = "";
-				operator = element;
+				operator = operators.value;
 			}else{
 				if(checkOperatorInOutput(outputField.value.toString()) || outputField.value.length == 0){
-					outputField.innerHTML = outputField.innerHTML + " " + element + " ";
+					outputField.innerHTML = outputField.innerHTML + " " + operators.value + " ";
 				}
-				operator = element;
+				operator = operators.value;
 			}
 		});
-	});
+    }
 
-	document.getElementById("key-=").addEventListener("click", function(){
+    var operators = document.getElementsByClassName("operator");
+	Array.prototype.forEach.call(operators, operatorPressed);
+
+
+	/* Command Events */
+
+	document.getElementById("key-=").addEventListener("click", equal);
+
+	function equal(){
 		if(!changeOperator){
 			number2 = parseFloat(inputField.value);
 		}else{
 			changeOperator = false;
 		}
 
-		switch(operator) {
-			case "+":
-				inputField.innerHTML = add(number1,number2);
-				outputField.innerHTML = "";
-				break;
-			case "-":
-				inputField.innerHTML = subtract(number1,number2);
-				outputField.innerHTML = "";
-				break;
-			case "*":
-				inputField.innerHTML = multiply(number1,number2);
-				outputField.innerHTML = "";
-				break;
-			case "/":
-				inputField.innerHTML = divide(number1,number2);
-				outputField.innerHTML = "";
-				break;
-		}
+		inputField.innerHTML = calculate(number1,number2,operator);
+		outputField.innerHTML = "";
+	}
 
-	});
+	document.getElementById("key-c").addEventListener("click",clear);
 
-	/* Key Press Events */
+	function clear(){
+		inputField.innerHTML = "";
+		outputField.innerHTML = "";
+		number1 = undefined;
+		number2 = undefined;
+	}
+
+	/* Number Events */
 	var numbers = document.getElementsByClassName("number");
 
 	function keyPressEvents(numbers){
 		if(numbers.value == 0){ 
-		 	document.getElementById("key-0").addEventListener("click", function() {
+		 	numbers.addEventListener("click", function() {
 				if(inputField.innerHTML > 0){
 					inputField.innerHTML =  inputField.innerHTML + 0;
 				}else{
@@ -152,7 +140,7 @@ window.addEventListener('load', function() {
 				}
 			});
 	 	}else{
-	 		document.getElementById("key-" + numbers.value).addEventListener("click", function() {
+	 		numbers.addEventListener("click", function() {
 				if(inputField.innerHTML == 0){
 					inputField.innerHTML = numbers.value;
 				}else{
