@@ -16,14 +16,15 @@
 </head>
 <body>
 <header>
-    <!-- TODO -->
     <a href="."><img src="../media/logo-wikipraktika.svg" alt="logo"/></a>
 
     <h1>Wikipraktika</h1>
 </header>
 
 <nav>
-    <h2>Navigation</h2>
+    <header>
+        <h2>Navigation</h2>
+    </header>
     <ul>
         <li><a href="./de/">Hauptseite</a></li>
         <li><a href="./de/topics/">Themenportale</a></li>
@@ -55,11 +56,11 @@
         </li>
     </ul>
 </nav>
-<!-- TODO navigation-->
-
 
 <main>
-    <h2>Taschenrechner</h2>
+    <header>
+        <h2>Taschenrechner</h2>
+    </header>
     <!-- Schriftgrössenwechsler: optionale Aufgabe -->
     <form id="font-size-form">
         <label for="font-slider">Schriftgrösse</label>
@@ -152,16 +153,19 @@
     </article>
 
     <article>
-        <h3>Demonstration</h3>
-
+        <header>
+            <h3>Demonstration</h3>
+        </header>
         <figure class="calculator">
-            <iframe src="calculator/index.html" height="420" width="400"></iframe>
+            <iframe src="calculator/index.html" height="440" width="400"></iframe>
             <figcaption>Casino Mini von 1972</figcaption>
         </figure>
     </article>
 
     <article>
-        <h3>Bedienung des TI-Nspire CX CAS</h3>
+        <header>
+            <h3>Bedienung des TI-Nspire CX CAS</h3>
+        </header>
         <figure class="fullPageVideo">
             <video poster="../media/ti-nspire-cx-cas.png" controls>
                 <source type="video/mp4" src="../media/TI-Nspire%20CX%20CAS%203D%20Model.mp4"/>
@@ -184,63 +188,51 @@
     </article>
 
     <article>
-        <h3>Taschenrechnervarianten</h3>
-        <ul>
-            <li>Einfach
-                <ul>
-                    <li>Grundrechenarten, Prozentrechnung</li>
-                </ul>
-            </li>
-            <li>Finanzwirtschaft
-                <ul>
-                    <li>Zinsrechnung, …</li>
-                    <li>zum Beispiel der „Klassiker“ HP-12C (hergestellt seit <time datetime="1981">1981</time>), HP 17 B (II) (hergestellt seit
-                        1988
-                    </li>
-                </ul>
-            </li>
-            <li>Boolesche Rechnungen
-                <ul>
-                    <li>Rechnen mit Dual-, Oktal- und Hexadezimalzahlen, z. B. TI Programmer)</li>
-                </ul>
-            </li>
-            <li>Wissenschaftlich
-                <ul>
-                    <li>Winkelfunktionen, Logarithmus, mathematische Statistik, …</li>
-                    <li>zum Beispiel TI-30 (seit 1976 dieselbe Typbezeichnung für intern völlig unterschiedliche
-                        Geräte
-                    </li>
-                </ul>
-            </li>
-            <li>Programmierbarer Taschenrechner</li>
-            <li>Grafikfähiger Taschenrechner
-                <ul>
-                    <li>Funktions-/Kurvendarstellung</li>
-                    <li>ab <time datetime="1985">1985</time> Geräte von Casio (fx-Serie, aktuelles Modell fx 9860G SD)</li>
-                    <li>1989 bis heute die HP-48-49-Reihe</li>
-                    <li>ab 1993 der TI-82 und seine Nachfolger</li>
-                    <li>aktuell der TI-84 Plus und TI-Nspire</li>
-                    <li>Grafikrechner sind typischerweise auch programmierbar.</li>
-                </ul>
-            </li>
-            <li>Computeralgebra-Rechner
-                <ul>
-                    <li>grafikfähige Taschenrechner mit eingebautem Computeralgebra-Kern</li>
-                    <li>erstes verbreitetes Gerät war der HP-48 von Hewlett-Packard (ab 1989),
-                        spätere Geräte zum Beispiel TI-92(+) (ab 1995), TI-89 (ab
-                        1998) und Voyage 200 (ab 2002), TI-Nspire CAS (ab 2007)
-                        von Texas Instruments, ClassPad 300 von Casio, HP 49g+ von
-                        Hewlett-Packard.
-                    </li>
-                </ul>
-            </li>
-        </ul>
-        <small class="source">
-            Taschenrechnervarianten, Source Wikipedia:
-            <a href="https://de.wikipedia.org/wiki/Taschenrechner">de.wikipedia.org/wiki/Taschenrechner</a>
-        </small>
+        <header>
+            <h3>Taschenrechnervarianten</h3>
+        </header>
+        <figure>
+            <dl>
+                <dt>Einfach</dt>
+                <dd>Grundrechenarten, Prozentrechnung</dd>
 
+                <dt>Finanzwirtschaft</dt>
+                <dd>Zinsrechnung, …</dd>
+                <dd>zum Beispiel der „Klassiker“ HP-12C (hergestellt seit <time datetime="1981">1981</time>), HP 17 B (II) (hergestellt seit
+                    1988</dd>
 
+                <dt>Boolesche Rechnungen</dt>
+                <dd>Rechnen mit Dual-, Oktal- und Hexadezimalzahlen, z. B. TI Programmer)</dd>
+
+                <dt>Wissenschaftlich</dt>
+                <dd>Winkelfunktionen, Logarithmus, mathematische Statistik, …</dd>
+                <dd>zum Beispiel TI-30 (seit 1976 dieselbe Typbezeichnung für intern völlig unterschiedliche
+                    Geräte</dd>
+
+                <dt>Programmierbarer Taschenrechner</dt>
+
+                <dt>Grafikfähiger Taschenrechner</dt>
+                <dd>Funktions-/Kurvendarstellung</dd>
+                <dd>ab <time datetime="1985">1985</time> Geräte von Casio (fx-Serie, aktuelles Modell fx 9860G SD)</dd>
+                <dd>1989 bis heute die HP-48-49-Reihe</dd>
+                <dd>ab 1993 der TI-82 und seine Nachfolger</dd>
+                <dd>aktuell der TI-84 Plus und TI-Nspire</dd>
+                <dd>Grafikrechner sind typischerweise auch programmierbar.</dd>
+
+                <dt>Computeralgebra-Rechner</dt>
+                <dd>grafikfähige Taschenrechner mit eingebautem Computeralgebra-Kern</dd>
+                <dd>erstes verbreitetes Gerät war der HP-48 von Hewlett-Packard (ab 1989),
+                    spätere Geräte zum Beispiel TI-92(+) (ab 1995), TI-89 (ab
+                    1998) und Voyage 200 (ab 2002), TI-Nspire CAS (ab 2007)
+                    von Texas Instruments, ClassPad 300 von Casio, HP 49g+ von
+                    Hewlett-Packard.
+                </dd>
+            </dl>
+            <figcaption>
+                Taschenrechnervarianten, Source Wikipedia:
+                <a href="https://de.wikipedia.org/wiki/Taschenrechner">de.wikipedia.org/wiki/Taschenrechner</a>
+            </figcaption>
+        </figure>
         <footer>
             Zuletzt geändert von Gabriela Kant
             <time datetime="2016-02-11 10:09">Donnerstag, 11. Februar 2016, 10:09</time>
@@ -248,7 +240,9 @@
     </article>
 
     <article>
-        <h3>Zeitgewinn</h3>
+        <header>
+            <h3>Zeitgewinn</h3>
+        </header>
         <table>
             <caption>Zeitgewinn durch Benutzung eines Taschenrechners</caption>
             <thead>
@@ -301,9 +295,8 @@
 
         </table>
         <figure>
-            <img class="smallCentered" src="../media/zeitgewinn.svg" alt="Grafik Zeigewinn" type="image/svg+xml" role="application"/>
+            <img class="smallCentered" src="../media/zeitgewinn.svg" alt="Grafik Zeigewinn" role="application" />
         </figure>
-
         <footer>
             Zuletzt geändert von Leandra Gross
             <time datetime="2016-02-29 13:02">Freitag, 29. Februar 2016, 13:02</time>
@@ -311,7 +304,9 @@
     </article>
 
     <article>
-        <h3>iPhone calculator tricks</h3>
+        <header>
+            <h3>iPhone calculator tricks</h3>
+        </header>
         <figure class="youtube">
             <iframe width="560" height="315" src="https://www.youtube.com/embed/a7rcVgb41-0" allowfullscreen></iframe>
             <figcaption>
@@ -329,8 +324,9 @@
     </article>
 
     <article>
-        <h3>Die besten und schlechtesten Taschenrechner</h3>
-
+        <header>
+            <h3>Die besten und schlechtesten Taschenrechner</h3>
+        </header>
         <p>In einer 2014 durchgeführten Benutzerbefragung schnitten die Modelle von Casino am Besten ab:</p>
         <ol>
             <li>Casino UX5</li>
@@ -351,8 +347,9 @@
     </article>
 
     <article>
-        <h3>Taschenrechner suchen nach Modell</h3>
-
+        <header>
+            <h3>Taschenrechner suchen nach Modell</h3>
+        </header>
         <form role="search">
             <input type="search" list="calcList"/>
             <datalist id="calcList">
@@ -371,8 +368,9 @@
     </article>
 
     <aside>
-        <h2>Neuen Autor registrieren</h2>
-
+        <header>
+            <h2>Neuen Autor registrieren</h2>
+        </header>
         <form>
             <fieldset>
                 <legend>Autor</legend>
@@ -450,12 +448,13 @@
     <small>
         Alle Inhalte von Wikipraktika stehen unter der
         <a href="http://creativecommons.org/licenses/by-sa/4.0/">
-            <img src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" alt="" />Creative Commons Attribution-ShareAlike 4.0 International License
+            <img src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" alt="" />
+        </a>
+        <a href="http://creativecommons.org/licenses/by-sa/4.0/">
+            Commons Attribution-ShareAlike 4.0 International License
         </a>
         und dürfen nur mit Nennung des Autors weiterverwendet werden.
     </small>
 </footer>
-
-<!-- TODO -->
 </body>
 </html>

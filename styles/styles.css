@@ -15,9 +15,6 @@ body {
 
 }
 
-
-
-
 /* images */
 a[hreflang="it"]::before {
 	background: url("../../media/flag-it.svg");
@@ -50,6 +47,7 @@ a[hreflang]::before {
 /* medias */
 iframe {
 	border: none;
+	overflow: hidden;
 }
 /* round corners*/
 figure.calculator > iframe, button, fieldset, select {
@@ -82,16 +80,12 @@ figure > video {
 figure.youtube > iframe {
 	width: calc(0.5*90vw);
 	height: calc(0.5*90vw * 9 / 16);
-	position: relative;
-	overflow: hidden;
 }
 
 
 figure.calculator > iframe {
 	width: calc(0.5*90vw);
-	height: calc(0.5*90vw*1.03);
-	position: relative;
-	overflow: hidden;
+	height: calc(0.5*90vw*1.13);
 }
 
 figure > img {
@@ -125,6 +119,11 @@ body > header > a {
 	margin-right: 10px;
 	padding: 5px;
 }
+nav, main {
+	padding-left: 5px;
+	counter-reset: h3counter;
+}
+
 h1 {
 	width: 100%;
 
@@ -133,7 +132,6 @@ h1 {
 	padding: 10px;
 	background: #005092;
 	float: none;
-
 }
 
 h2 {
@@ -141,8 +139,8 @@ h2 {
 	margin-bottom: 10px;
 	font-size: 35px;
 	display: block;
-	counter-reset: h3counter;
 }
+
 h3 {
 	font-size: 26px;
 	border-bottom: solid 1px;
@@ -180,7 +178,7 @@ main a {
 article {
 	display: block;
 	overflow: hidden;
-	margin: 1em;
+	margin: 1em 1em 1em 5px;
 }
 
 article > footer {
@@ -205,23 +203,20 @@ nav > ul > li > ul {
 	list-style-type: none;
 }
 
-article > ul {
-	list-style-type: none;
-	list-style-position: inside;
+dt {
 	padding: 0;
 
 	font-weight: bold;
 	color: #005092;
 }
 
-article > ul > li > ul {
-	list-style: none;
-	padding-left: 10px;
+dd {
+	padding-left: 1em;
 	font-weight: normal;
 	color: #000;
 }
 
-article > ul > li > ul > li:before {
+dd:before {
 	content: "\2316";
 	padding-right: 5px;
 }
@@ -345,21 +340,21 @@ label:after {
 }
 
 /* footer */
-footer {
+body > footer {
 	margin: 10px 0 20px 0;
 	padding: 10px 5px;
 	background: #005092;
 	width: 100%;
 	color: #fff;
 }
-footer img {
+body > footer img {
 	vertical-align: middle;
 }
-footer a {
+body > footer a {
 	color: #fff;
 }
 
-footer a:hover {
+body > footer a:hover {
 	text-decoration: none;
 }
 
