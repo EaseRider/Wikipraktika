@@ -39,9 +39,9 @@ function calculate(n1,n2,operator){
 function checkOperatorInOutput(text){
 
 	if(text.indexOf("+") == -1 && text.indexOf("/") == -1 && text.indexOf("*") == -1 && text.indexOf("-") == -1  ){
-		return true;
+		return false;
 	}
-	return false;
+	return true;
 }
 
 function findAndReplaceOperator(number,mainOperator){
@@ -71,7 +71,7 @@ window.addEventListener('load', function() {
 	var number1;
 	var number2;
 	var operator;
-	var changeOperator;
+	var changeOperator = false;
 	var invalid = false;
 	var inputField = document.getElementById("input");
 	var outputField = document.getElementById("output");
@@ -80,10 +80,9 @@ window.addEventListener('load', function() {
 
 	var operators = document.getElementsByClassName("operator");
 
-    function operatorPressed(operator){
+    function operatorPressed(operatorField){
 
-    	operator.addEventListener("click", function(){
-    		
+		operatorField.addEventListener("click", function(){
     		if(invalid){
 				return;
 			}
@@ -91,21 +90,19 @@ window.addEventListener('load', function() {
 			if(inputField.value != "" && outputField.value != ""){
 				number1 = parseFloat(outputField.value);
 				number2 = parseFloat(inputField.value);
-				outputField.innerHTML = number1 + " " + operator.value + " ";
+				outputField.innerHTML = number1 + " " + operatorField.value + " ";
 				inputField.innerHTML = number2;
-				operator = operator.value;
 				changeOperator = true;
 			}else if(inputField.innerHTML != ""){
 				number1 = parseFloat(inputField.value);
-				outputField.innerHTML = number1 + " " + operator.value + " ";
+				outputField.innerHTML = number1 + " " + operatorField.value + " ";
 				inputField.innerHTML = "";
-				operator = operator.value;
 			}else{
 				if(checkOperatorInOutput(outputField.value.toString()) || outputField.value.length == 0){
-					outputField.innerHTML = outputField.innerHTML + " " + operator.value + " ";
+					outputField.innerHTML = number1 + " " + operatorField.value + " ";
 				}
-				operator = operator.value;
 			}
+			operator = operatorField.value;
 		});
     }
 
