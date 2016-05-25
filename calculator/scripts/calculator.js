@@ -166,6 +166,4 @@ window.addEventListener('load', function() {
 	}
 
 	Array.prototype.forEach.call(numbers, keyPressEvents);
-
-
 });
