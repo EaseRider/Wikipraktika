@@ -55,11 +55,11 @@ function findAndReplaceOperator(number,mainOperator){
 			break;
 		case operators[1]:
 			number = number.value.replace(operators[1],mainOperator);
-			break;			
+			break;
 		case operators[2]:
 			number = number.value.replace(operators[2],mainOperator);
 			break;
-	}		
+	}
 	return number;
 }
 
@@ -80,31 +80,31 @@ window.addEventListener('load', function() {
 
 	var operators = document.getElementsByClassName("operator");
 
-    function operatorPressed(operators){
+    function operatorPressed(operator){
 
-    	document.getElementById("key-" + operators.value).addEventListener("click", function(){
+    	operator.addEventListener("click", function(){
     		
     		if(invalid){
 				return;
 			}
 
 			if(inputField.value != "" && outputField.value != ""){
-				number1 = parseFloat(findAndReplaceOperator(outputField.value.toString(),operators.value));
+				number1 = parseFloat(outputField.value);
 				number2 = parseFloat(inputField.value);
-				outputField.innerHTML = number1 + " " + operators.value + " ";
+				outputField.innerHTML = number1 + " " + operator.value + " ";
 				inputField.innerHTML = number2;
-				operator = operators.value;
+				operator = operator.value;
 				changeOperator = true;
 			}else if(inputField.innerHTML != ""){
 				number1 = parseFloat(inputField.value);
-				outputField.innerHTML = number1 + " " + operators.value + " ";
+				outputField.innerHTML = number1 + " " + operator.value + " ";
 				inputField.innerHTML = "";
-				operator = operators.value;
+				operator = operator.value;
 			}else{
 				if(checkOperatorInOutput(outputField.value.toString()) || outputField.value.length == 0){
-					outputField.innerHTML = outputField.innerHTML + " " + operators.value + " ";
+					outputField.innerHTML = outputField.innerHTML + " " + operator.value + " ";
 				}
-				operator = operators.value;
+				operator = operator.value;
 			}
 		});
     }
@@ -153,25 +153,9 @@ window.addEventListener('load', function() {
 	var numbers = document.getElementsByClassName("number");
 
 	function keyPressEvents(numbers){
-	
-		if(numbers.value == 0){ 
 		 	numbers.addEventListener("click", function() {
 
 		 		if(invalid){
-					invalid = false;
-					clear();
-				}
-
-				if(inputField.innerHTML > 0){
-					inputField.innerHTML =  inputField.innerHTML + 0;
-				}else{
-					inputField.innerHTML = 0;
-				}
-			});
-	 	}else{
-	 		numbers.addEventListener("click", function() {
-	 			
-	 			if(invalid){
 					invalid = false;
 					clear();
 				}
@@ -182,7 +166,6 @@ window.addEventListener('load', function() {
 					inputField.innerHTML = inputField.innerHTML +  numbers.value;
 				}
 	 		});
-	 	}
 	}
 
 	Array.prototype.forEach.call(numbers, keyPressEvents);
